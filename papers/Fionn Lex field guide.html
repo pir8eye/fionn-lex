@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fionn Lex field guide</title>
+<style>
+:root{--bg:#12161d;--panel:#1b212c;--line:#2e3747;--ink:#e8e3d8;--mut:#9aa3b2;--brass:#d0a85c;--teal:#6fc1b4;--bad:#e58b7a;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f1ea;--panel:#fff;--line:#d9d3c4;--ink:#1d2430;--mut:#5d6677;--brass:#8a6a22;--teal:#1d7f72;--bad:#b04a38;color-scheme:light}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 18px 56px}
+h1,h2{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:600;line-height:1.2}
+h1{font-size:2.1rem;margin:0 0 6px}
+h2{font-size:1.35rem;margin:38px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+p{max-width:68ch}.mut{color:var(--mut)}
+code,.code{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--brass)}
+ol{padding-left:1.2rem;max-width:68ch}li{margin:4px 0}
+.wrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.row{display:grid;grid-template-columns:9rem repeat(4,minmax(86px,1fr));min-width:520px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.lab{padding:10px;font-size:.85rem;color:var(--mut);align-self:center}.lab b{display:block;color:var(--ink);font-weight:600}
+.cell{padding:8px 4px;text-align:center;border-left:1px solid var(--line);font-size:.8rem}
+.cell svg{width:64px;height:64px;display:block;margin:0 auto 2px}
+.cell .sym{font-family:Georgia,serif;font-size:1.05rem;color:var(--ink)}.cell .n{color:var(--mut)}
+.ln{stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;opacity:.85}
+.ci{fill:none;stroke:var(--brass);stroke-width:2.6}.dt{fill:var(--teal)}
+.ctl{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:12px 0}
+label{font-size:.92rem}
+select,input,textarea{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:7px 9px;font:inherit}
+textarea{width:100%;min-height:78px;font-family:ui-monospace,Menlo,Consolas,monospace}
+input[type=number]{width:5.2rem}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.out{margin-top:14px;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:6px;min-height:60px}
+.strip{display:flex;flex-wrap:wrap;gap:6px 4px}
+.g{text-align:center;font-size:.72rem}.g svg{width:46px;height:46px;display:block}
+.gap{width:20px}
+.plain{font-size:1.5rem;font-family:Georgia,serif;letter-spacing:.06em}
+.note{border-left:3px solid var(--brass);padding:2px 14px;margin:18px 0;color:var(--mut);max-width:68ch}
+</style>
+</head>
+<body>
+<main>
+<h1>Fionn Lex field guide</h1>
+<p class="mut">Read, write and shift the 44-glyph Cryptographic Alphabet. Every drawing below is generated from the rules, so the guide and the system cannot drift apart.</p>
+
+<h2>Reading a glyph</h2>
+<ol>
+<li>Count the circles, 1 to 4. This is the only base 4 digit.</li>
+<li>Count the structure added to the grid: lines first, then rays, then boundaries. That gives the iteration, 1 to 11.</li>
+<li>Glyph number = 4 × (iteration − 1) + circles. Letters are 1 to 26 and digraphs are 27 to 44.</li>
+<li>Optional dot layer: each dot, filled clockwise from the lower-left quadrant, adds 44.</li>
+</ol>
+<p class="note">The tell: two circles form an infinity running upper-left to lower-right. The lower-left to upper-right form is the other half of the four-circle glyph, and marks someone who has not learned the code.</p>
+
+<h2>The 44 glyphs</h2>
+<div class="ctl"><label>Dots shown <select id="dots"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label><span class="mut" id="dnote"></span></div>
+<div class="wrap" id="grid"></div>
+<p class="mut" style="margin-top:10px">Codes are keyboard labels, unique per iteration, not drawings. Digraphs are a proposed set of 8 vowel and 10 consonant pairs in alphabetical order.</p>
+
+<h2>Encode and decode</h2>
+<div class="ctl">
+<label><input type="radio" name="m" value="e" checked> Encode text</label>
+<label><input type="radio" name="m" value="d"> Decode codes</label>
+<label>Shift <input type="number" id="shift" value="3" min="-200" max="200"></label>
+<label><input type="checkbox" id="di" checked> Use digraph glyphs</label>
+</div>
+<textarea id="inp" spellcheck="false" aria-label="Input">the whole world</textarea>
+<div class="out" id="out" aria-live="polite"></div>
+<p class="mut" style="margin-top:10px">The shift moves each glyph around the ring of 44, so a shifted glyph is still a valid glyph. Digraphs are used greedily when the box is checked. Spaces are shown as gaps, and punctuation and numerals are not yet defined.</p>
+
+<p class="note">Working draft. Open design choices: the final digraph set, whether the shift ring is 44 or 220 once dots are included, and whether digraphs are mandatory or optional in plaintext.</p>
+</main>
+<script>
+const STEPS=['Bare grid','Horizontal line','Vertical line','Ray 1, top-right','Ray 2, bottom-right','Ray 3, bottom-left','Ray 4, top-left','Bottom boundary','Left boundary','Top boundary','Right boundary'];
+const PRE=['','-','+','/','<','/<','><','_','[','¬',']'];
+const CIR=['o','8','8o','88'];
+const SYM=[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].concat(['ae','au','ch','ck','ee','ei','eu','ie','ng','oe','oo','pf','ph','qu','rh','sh','th','wh']);
+const Q=[[30,70],[30,30],[70,30],[70,70]];
+const CQ=[[0],[1,3],[0,1,3],[0,1,2,3]];
+const LN=[[8,50,92,50],[50,8,50,92],[50,50,92,8],[50,50,92,92],[50,50,8,92],[50,50,8,8],[8,92,92,92],[8,8,8,92],[8,8,92,8],[92,8,92,92]];
+const code=i=>PRE[Math.floor(i/4)]+CIR[i%4];
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const mod=n=>((n%44)+44)%44;
+function glyph(i,dots){
+  const it=Math.floor(i/4),c=i%4;let s='<svg viewBox="0 0 100 100" role="img" aria-label="glyph '+(i+1)+'">';
+  for(let k=0;k<it;k++){const l=LN[k];s+='<line class="ln" x1="'+l[0]+'" y1="'+l[1]+'" x2="'+l[2]+'" y2="'+l[3]+'"/>';}
+  CQ[c].forEach(q=>{s+='<circle class="ci" cx="'+Q[q][0]+'" cy="'+Q[q][1]+'" r="13"/>';});
+  for(let d=0;d<(dots||0);d++)s+='<circle class="dt" cx="'+Q[d][0]+'" cy="'+Q[d][1]+'" r="3.4"/>';
+  return s+'</svg>';
+}
+const $=id=>document.getElementById(id);
+function grid(){
+  const d=+$('dots').value;let h='';
+  for(let it=0;it<11;it++){
+    h+='<div class="row"><div class="lab"><b>'+(it+1)+'</b>'+STEPS[it]+'</div>';
+    for(let c=0;c<4;c++){const i=it*4+c;
+      h+='<div class="cell">'+glyph(i,d)+'<div class="sym">'+SYM[i]+'</div><div class="code">'+esc(code(i))+'</div><div class="n">no. '+(i+1+44*d)+'</div></div>';}
+    h+='</div>';
+  }
+  $('grid').innerHTML=h;
+  $('dnote').textContent=d?d+' dot'+(d>1?'s':'')+' adds +'+44*d+' to every glyph number.':'';
+}
+function seg(t){
+  t=t.toLowerCase();const o=[];
+  for(let p=0;p<t.length;){
+    const ch=t[p];
+    if(/\s/.test(ch)){o.push(-1);p++;continue;}
+    if(!/[a-z]/.test(ch)){p++;continue;}
+    const di=$('di').checked?SYM.indexOf(t.substr(p,2)):-1;
+    if(di>=26){o.push(di);p+=2;}else{o.push(ch.charCodeAt(0)-97);p++;}
+  }
+  return o;
+}
+function run(){
+  const sh=parseInt($('shift').value)||0,mode=document.querySelector('input[name=m]:checked').value,v=$('inp').value;
+  let h='';
+  if(mode==='e'){
+    h='<div class="strip">';
+    seg(v).forEach(x=>{if(x<0){h+='<div class="gap"></div>';return;}
+      const i=mod(x+sh);h+='<div class="g">'+glyph(i,0)+'<span class="code">'+esc(code(i))+'</span></div>';});
+    h+='</div>';
+  }else{
+    const map={};for(let i=0;i<44;i++)map[code(i)]=i;
+    let bad=0;const txt=v.trim().split(/\s+/).filter(Boolean).map(t=>{
+      if(!(t in map)){bad++;return '?';}
+      return SYM[mod(map[t]-sh)];}).join('');
+    h='<div class="plain">'+esc(txt||'')+'</div>';
+    if(bad)h+='<p style="color:var(--bad);margin:8px 0 0">'+bad+' code'+(bad>1?'s were':' was')+' not recognised. Separate codes with spaces.</p>';
+  }
+  $('out').innerHTML=h||'<span class="mut">Nothing to show yet.</span>';
+}
+$('dots').onchange=grid;
+['inp','shift','di'].forEach(id=>$(id).addEventListener('input',run));
+document.querySelectorAll('input[name=m]').forEach(r=>r.addEventListener('change',()=>{
+  $('inp').value=r.value==='e'?'the whole world':'';run();}));
+grid();run();
+</script>
+</body>
+</html>
