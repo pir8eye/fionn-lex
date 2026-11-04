@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fionn Lex & The Inverse Aristotle Chair Presentation</title>
+<style>
+  :root {
+    --bg-color: #0f141c;
+    --panel-bg: #18202c;
+    --border-color: #2e3a4e;
+    --text-main: #e6e8ec;
+    --text-muted: #9aa5b5;
+    --accent-gold: #d0a85c;
+    --accent-teal: #6fc1b4;
+    --accent-blue: #4a90e2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 16px;
+  }
+
+  h1 { font-family: Georgia, serif; font-size: 2.2rem; color: var(--accent-gold); }
+  p.subtitle { color: var(--text-muted); font-size: 1.05rem; }
+
+  /* Navigation Tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 24px;
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    color: var(--text-muted);
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .tab-btn:hover { color: var(--text-main); background: #222c3d; }
+  .tab-btn.active {
+    background: var(--accent-teal);
+    color: #0f141c;
+    border-color: var(--accent-teal);
+  }
+
+  /* Tab Content */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  h2 { font-family: Georgia, serif; color: var(--accent-teal); margin-bottom: 12px; font-size: 1.5rem; }
+  h3 { color: var(--accent-gold); margin: 16px 0 8px; font-size: 1.2rem; }
+  p, li { margin-bottom: 12px; font-size: 1.05rem; }
+  ul, ol { padding-left: 24px; }
+  blockquote {
+    border-left: 4px solid var(--accent-gold);
+    padding-left: 16px;
+    margin: 16px 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Interactive Elements */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  label { display: block; font-weight: bold; margin-bottom: 6px; color: var(--accent-gold); }
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    background: #0f141c;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-main);
+    font-family: monospace;
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .output-box {
+    background: #0f141c;
+    border: 1px dashed var(--accent-teal);
+    padding: 16px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: var(--accent-teal);
+    font-size: 1.1rem;
+    min-height: 48px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>The Fionn Lex Protocol</h1>
+    <p class="subtitle">The Inverse Aristotle Chair & Pedagogical Cryptography Architecture</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-overview')">1. Executive Overview</button>
+    <button class="tab-btn" onclick="switchTab('tab-thesis')">2. Pedagogy of Trust</button>
+    <button class="tab-btn" onclick="switchTab('tab-ieee')">3. IEEE Whitepaper</button>
+    <button class="tab-btn" onclick="switchTab('tab-interactive')">4. Live Interactive Tools</button>
+  </nav>
+
+  <!-- TAB 1: EXECUTIVE OVERVIEW -->
+  <div id="tab-overview" class="tab-content active">
+    <div class="card">
+      <h2>Project Overview</h2>
+      <p>The <strong>Fionn Lex Protocol</strong> is a tabletop educational architecture designed to teach advanced cryptographic concepts through direct physical manipulation, spatial reasoning, and asymmetric collaboration—bypassing mathematical abstraction for non-abstract learners.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Core Mechanics</h3>
+        <ul>
+          <li><strong>44-Glyph Matrix:</strong> 26 Latin letters + 18 phonetic digraphs generated systematically using circles and line iterations.</li>
+          <li><strong>Tactile Rotations:</strong> Modulo arithmetic translates into physical key rotations and visual grid overlays.</li>
+          <li><strong>Google-Proof:</strong> Original geometric bytecode cannot be solved via online AI or search engines.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Primary Artifacts</h3>
+        <ul>
+          <li><strong>The Field Guide:</strong> Deterministic SVG-generated orthography.</li>
+          <li><strong>The 1755 Johnson Dictionary:</strong> Primary source text used as dynamic, non-linear shift keys.</li>
+          <li><strong>Asymmetric Sealed Envelopes:</strong> Peer-to-peer key splits requiring mutual player trust.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: PEDAGOGY OF TRUST -->
+  <div id="tab-thesis" class="tab-content">
+    <div class="card">
+      <h2>The Pedagogy of Trust & Assumed Competence</h2>
+      <blockquote>
+        "Educational systems often operate on a deficit model: 'The student is empty; we must pour abstract knowledge into them.' Your approach operates on a trust model: 'The student is already a natural problem solver. We trust them enough to hand them a complex physical puzzle.'"
+      </blockquote>
+      <h3>Key Philosophical Pillars</h3>
+      <ol>
+        <li><strong>The Inverse Aristotle Chair:</strong> Derive abstract "Forms" (cryptographic theory) by physically interacting with tangible "Matter" (grids, artifacts, books).</li>
+        <li><strong>Assumed Competence:</strong> Respecting the player's intelligence by eliminating trivializing shortcuts and hand-holding.</li>
+        <li><strong>Asymmetric Social Engine:</strong> Trust is both the pedagogical foundation and the cryptographic requirement (Red/Blue key blending).</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- TAB 3: IEEE WHITEPAPER -->
+  <div id="tab-ieee" class="tab-content">
+    <div class="card">
+      <h2>IEEE Paper Outline & Text</h2>
+      <h3>Title: The Inverse Aristotle Chair: Re-Embodiment, Trust, and Tactile Simulation in Cryptographic Pedagogy</h3>
+      <p><strong>Abstract:</strong> The education of modern cryptographers relies heavily on mathematical abstraction... [Full text available in generated PDF document].</p>
+      
+      <h3>Section Summaries:</h3>
+      <ul>
+        <li><strong>I. Introduction:</strong> The flaw of deficit-based STEM education.</li>
+        <li><strong>II. Related Work:</strong> Situated Learning Theory & Embodied Cognition.</li>
+        <li><strong>III. The Distortion of Abstraction:</strong> Reversing Aristotelian hylomorphism.</li>
+        <li><strong>IV. Fionn Lex Architecture:</strong> Simplex, Complex, and Quantex tiers.</li>
+        <li><strong>V–VI. Case Study:</strong> The "Hello World" laboratory experiment.</li>
+        <li><strong>VII–X. Thesis:</strong> Trust as a Cryptographic and Social Mechanic.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 4: INTERACTIVE TOOLS -->
+  <div id="tab-interactive" class="tab-content">
+    <div class="card">
+      <h2>Interactive Shift & Dictionary Key Calculator</h2>
+      <div class="grid-2">
+        <div>
+          <label for="dictWord">Dictionary Key Word (1755 Johnson):</label>
+          <input type="text" id="dictWord" value="THIS" oninput="calculateShift()">
+
+          <label for="plainText">Text to Encode:</label>
+          <input type="text" id="plainText" value="HELLO WORLD" oninput="calculateShift()">
+        </div>
+        <div>
+          <label>Derived Caesar Shift:</label>
+          <div id="shiftVal" class="output-box">20 (T=20)</div>
+
+          <label style="margin-top:12px;">Cipher Index Output:</label>
+          <div id="cipherOut" class="output-box">--</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function calculateShift() {
+    const word = document.getElementById('dictWord').value.toUpperCase().replace(/[^A-Z]/g, '');
+    const text = document.getElementById('plainText').value.toUpperCase();
+    
+    if (!word) {
+      document.getElementById('shiftVal').innerText = "0";
+      document.getElementById('cipherOut').innerText = text;
+      return;
+    }
+
+    // Example shift calculation based on first letter's index
+    const shift = word.charCodeAt(0) - 64;
+    document.getElementById('shiftVal').innerText = `${shift} (Key: ${word[0]})`;
+
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      let code = text.charCodeAt(i);
+      if (code >= 65 && code <= 90) {
+        let shifted = ((code - 65 + shift) % 26) + 65;
+        result += String.fromCharCode(shifted);
+      } else {
+        result += text[i];
+      }
+    }
+    document.getElementById('cipherOut').innerText = result;
+  }
+
+  // Initial calculation on load
+  calculateShift();
+</script>
+</body>
+</html>
